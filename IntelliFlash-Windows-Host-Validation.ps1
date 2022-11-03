@@ -121,6 +121,7 @@ https://intelliflash.io
 		$CurrentOSVersion = [version](Get-CimInstance Win32_OperatingSystem).Version
 		$Win2012R2Ver = [version]'6.3.9600'
 		$Win2016RTMVer = [version]'10.0.14393'
+		$Win2019OSVersion = [version]'10.0.17763'
 		$OS_Description = (Get-WmiObject Win32_OperatingSystem).Name
 		If ($CurrentOSVersion -lt $Win2012R2Ver -or $OS_Description -notlike "*Server 201*"){
 			Write-Host "This function is compatible with Windows Server 2012 R2, 2016, and 2019 Only" -BackgroundColor Black -ForegroundColor Yellow; Break
@@ -402,6 +403,12 @@ https://intelliflash.io
 					$EachLog | Add-Member -Type NoteProperty -Name ISCSI-KB2955164-Missing -Value "False"
 				}
 			}
+			If ($CurrentOSVersion -eq $Win2016RTMVer -And !$FConly){
+					Write-Host "Please update the OS with all the recommended updates from Microsoft." -BackgroundColor Black -ForegroundColor Red
+			}
+			If ($CurrentOSVersion -eq $Win2019OSVersion -And !$FConly){
+					Write-Host "Please update the OS with all the recommended updates from Microsoft." -BackgroundColor Black -ForegroundColor Red
+			}
 		#Check for TDPS
 		If ($TDPS){
 			$TDPSReg = $()
@@ -630,3 +637,5 @@ https://intelliflash.io
         $ALLCHANGES >> $LOGFILE
         Start $LOGFILE
     }
+
+

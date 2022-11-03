@@ -121,6 +121,7 @@ https://intelliflash.io
 		$CurrentOSVersion = [version](Get-CimInstance Win32_OperatingSystem).Version
 		$Win2012R2Ver = [version]'6.3.9600'
 		$Win2016RTMVer = [version]'10.0.14393'
+        $Win2019OSVersion = [version]'10.0.17763'
 		$OS_Description = (Get-WmiObject Win32_OperatingSystem).Name
 		If ($CurrentOSVersion -lt $Win2012R2Ver -or $OS_Description -notlike "*Server 201*"){
 			Write-Host "This function is compatible with Windows Server 2012 R2, 2016, and 2019 Only" -BackgroundColor Black -ForegroundColor Yellow; Break
@@ -402,6 +403,28 @@ https://intelliflash.io
 					$EachLog | Add-Member -Type NoteProperty -Name ISCSI-KB2955164-Missing -Value "False"
 				}
 			}
+                        If ($CurrentOSVersion -eq $Win2016RTMVer -And !$FConly){
+				$FixCheck = (get-wmiobject -class win32_quickfixengineering |Where {$_.HotFixID -eq ""})
+				If (!$FixCheck){
+					Write-Host "KB2955164 is missing. Please download and install : `nhttps://support.microsoft.com/en-us/help/2908783/data-corruption-occurs-on-iscsi-luns-in-windows`n`nThe above link has been added to your clipboard." -BackgroundColor Black -ForegroundColor Red
+					Echo "https://support.microsoft.com/en-us/help/2908783/data-corruption-occurs-on-iscsi-luns-in-windows" | Clip
+					$EachLog | Add-Member -Type NoteProperty -Name ISCSI-KB2955164-Missing -Value "True"
+					Break
+					}Else{
+					$EachLog | Add-Member -Type NoteProperty -Name ISCSI-KB2955164-Missing -Value "False"
+				}
+			}
+                        If ($CurrentOSVersion -eq $Win2019OSVersion -And !$FConly){
+				$FixCheck = (get-wmiobject -class win32_quickfixengineering |Where {$_.HotFixID -eq "KB4530715"})
+				If (!$FixCheck){
+					Write-Host "KB4530715 is missing. Please download and install : `nhttps://support.microsoft.com/en-us/help/4530715`n`nThe above link has been added to your clipboard." -BackgroundColor Black -ForegroundColor Red
+					Echo "https://support.microsoft.com/en-us/help/4530715" | Clip
+					$EachLog | Add-Member -Type NoteProperty -Name ISCSI-KB2955164-Missing -Value "True"
+					Break
+					}Else{
+					$EachLog | Add-Member -Type NoteProperty -Name ISCSI-KB2955164-Missing -Value "False"
+				}
+			}
 		#Check for TDPS
 		If ($TDPS){
 			$TDPSReg = $()
@@ -630,3 +653,5 @@ https://intelliflash.io
         $ALLCHANGES >> $LOGFILE
         Start $LOGFILE
     }
+
+

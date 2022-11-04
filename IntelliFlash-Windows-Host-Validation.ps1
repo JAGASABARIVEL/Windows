@@ -404,10 +404,10 @@ https://intelliflash.io
 				}
 			}
 			If ($CurrentOSVersion -eq $Win2016RTMVer -And !$FConly){
-					Write-Host "Please update the OS with all the recommended updates from Microsoft." -BackgroundColor Black -ForegroundColor Red
+					Write-Host "We do not have any hotfix recommendation for 2016." -BackgroundColor Black -ForegroundColor Red
 			}
 			If ($CurrentOSVersion -eq $Win2019OSVersion -And !$FConly){
-					Write-Host "Please update the OS with all the recommended updates from Microsoft." -BackgroundColor Black -ForegroundColor Red
+					Write-Host "We do not have any hotfix recommendation for 2019." -BackgroundColor Black -ForegroundColor Red
 			}
 		#Check for TDPS
 		If ($TDPS){

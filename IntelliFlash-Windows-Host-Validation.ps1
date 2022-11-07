@@ -82,12 +82,12 @@ https://intelliflash.io
 
 		$MajorVer = 3
 		$MinorVer = 11
-		$PatchVer = 0
-		$BuildVer = 4
-		$VerMonth = 08
-		$VerDay = 26
-		$VerYear = 2020
-		$Author = "Ken Nothnagel & Ben Kendall, Tintri IntelliFlash PS"
+		$PatchVer = 1
+		$BuildVer = 2
+		$VerMonth = 11
+		$VerDay = 07
+		$VerYear = 2022
+		$Author = "Ken Nothnagel, Ben Kendall, Jagasabarivel K, Tintri IntelliFlash PS"
 		$VerMonthName = (Get-Culture).DateTimeFormat.GetAbbreviatedMonthName($VerMonth)
 		$LogReport += $EachLog
 		$scriptpath = Split-Path -parent $MyInvocation.MyCommand.Definition

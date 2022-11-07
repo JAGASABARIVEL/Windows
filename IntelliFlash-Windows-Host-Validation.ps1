@@ -82,8 +82,8 @@ https://intelliflash.io
 
 		$MajorVer = 3
 		$MinorVer = 11
-		$PatchVer = 1
-		$BuildVer = 2
+		$PatchVer = 0
+		$BuildVer = 5
 		$VerMonth = 11
 		$VerDay = 07
 		$VerYear = 2022
